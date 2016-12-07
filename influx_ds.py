@@ -5,35 +5,35 @@ from influxdb import InfluxDBClient
 
 
 # Setting up parser arguments
-parser = argparse.ArgumentParser()
-parser.add_argument('-s', '--server', action='store', dest='SERVER',
+PARSER = argparse.ArgumentParser()
+PARSER.add_argument('-s', '--server', action='store', dest='SERVER',
                     help='Ip address of the InfluxDB server, default 127.0.0.1', default='127.0.0.1')
-parser.add_argument('-p', '--port', action='store', dest='PORT',
+PARSER.add_argument('-p', '--port', action='store', dest='PORT',
                     help='InfluxDB port, default 8086', default=8086)
-parser.add_argument('-d', '--database', action='store', dest='DATABASE',
+PARSER.add_argument('-d', '--database', action='store', dest='DATABASE',
                     help='Database name, default telegraf', default='telegraf')
-parser.add_argument('-n', '--name', action='store', dest='POLICY_NAME',
+PARSER.add_argument('-n', '--name', action='store', dest='POLICY_NAME',
                     help='New or existent policy name, default telegraf_ds', default='telegraf_ds')
-parser.add_argument('-l', '--duration', action='store', dest='POLICY_DURATION',
+PARSER.add_argument('-l', '--duration', action='store', dest='POLICY_DURATION',
                     help='Duration of the data inside the created policy, default 104w', default='104w')
-parser.add_argument('-a', '--ago', action='store', dest='AGO',
+PARSER.add_argument('-a', '--ago', action='store', dest='AGO',
                     help='Selects how many days to keep without downsampling data, default 7d', default='7d')
-parser.add_argument('-t', '--autogen-duration', action='store', dest='AUTOGEN_DURATION',
+PARSER.add_argument('-t', '--autogen-duration', action='store', dest='AUTOGEN_DURATION',
                     help='Sets the autogen new duration, default 168h', default='168h')
-parser.add_argument('-g', '--group-by', action='store', dest='GROUP_BY',
+PARSER.add_argument('-g', '--group-by', action='store', dest='GROUP_BY',
                     help='New downsampled time resolution, default 30m', default='30m')
-parser.add_argument('-u', '--update_policy', action='store', dest='UPDATE',
+PARSER.add_argument('-u', '--update_policy', action='store', dest='UPDATE',
                     help="Update the policy if exists, default False", default=False)
-parser.add_argument('-o', '--overwrite', action='store', dest='OVERWRITE',
+PARSER.add_argument('-o', '--overwrite', action='store', dest='OVERWRITE',
                     help="Overwrite the query if exists, default False", default=False)
 
 # Checkinf if user passed any parameter
 if not len(sys.argv) > 1:
-    parser.print_help()
+    PARSER.print_help()
     sys.exit()
 
-
-PARAMS = parser.parse_args()
+# Getting params
+PARAMS = PARSER.parse_args()
 
 AUTOGEN_NAME = 'autogen'
 SERVER = PARAMS.SERVER
